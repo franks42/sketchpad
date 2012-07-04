@@ -2,7 +2,8 @@
   (:use [clojure.pprint]
         [seesaw core keystroke meta]
         [sketchpad help file-manager tab-manager repl utils edit-menu vim-mode default-mode edit-mode vim-mode layout-config toggle-vim-mode-action filetree completion-builder]
-        [clooj project dev-tools indent editor doc-browser search style indent])
+        [clooj project dev-tools indent editor doc-browser search style indent]
+        [clj-ns-browser.sdoc])
   (:require 
         [sketchpad.rtextscrollpane :as sp]
         [sketchpad.rsyntaxtextarea :as cr]
@@ -206,6 +207,18 @@
                           :mnemonic "S" 
                           :key (keystroke "alt TAB") 
                           :listen [:action (fn [_] (show-tab-help app (find-focused-text-pane app) inc toggle-file-tree-panel))])
+               (menu-item :text "NS-Browser..."
+                          :key (keystroke "meta shift D") 
+                          :listen [:action 
+                            (fn [_] 
+;;                               (eval '(let [t# (@sketchpad.core/current-app :doc-text-area)] 
+                              (when-let [t# (eval '(@sketchpad.core/current-app :doc-text-area))] 
+                              ;;(let [t (:doc-text-area app)] 
+                                (when-let [s# (selection t#)] 
+                                  (sdoc* 
+                                    (if (= "ns" (str (first (current-ns-form app)))) 
+                                      (str (second (current-ns-form app))))
+                                    (subs (config t# :text) (first s#) (second s#))))))])
                (separator)
                 (menu-item :text "Begin recording macro..." 
                            :key (keystroke "ctrl Q") 

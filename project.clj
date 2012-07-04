@@ -17,5 +17,7 @@
                  [auto-complete "0.1.0-SNAPSHOT"]
                  ; [com.github.insubstantial/substance "7.1"]
                  [timbre "0.5.1-SNAPSHOT"]
+                 [clj-ns-browser "1.3.0-SNAPSHOT"]
                  ]
+;;  :dev-dependencies [[clj-ns-browser "1.3.0-SNAPSHOT"]]
   :jvm-opts ~(if (= (System/getProperty "os.name") "Mac OS X") ["-Xdock:name=Sketchpad"] []))

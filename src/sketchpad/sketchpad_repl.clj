@@ -134,6 +134,7 @@
 		     (use '[clojure.repl :only (source apropos dir pst doc find-doc)])
 		     (use '[clojure.java.javadoc :only (javadoc)])
 		     (use '[clojure.pprint :only (pp pprint)])
+		     (use '[clj-ns-browser.sdoc :only (sdoc sdoc*)])
 		     (prompt)
 		     (flush)
 		     (loop []
